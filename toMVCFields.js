@@ -4,11 +4,13 @@ function toMvcFields(target) {
 	}
 	
 	function toMVCSerializedObject(keyValuePairs) {
-		var $form = $("<form />");
-		$.each(keyValuePairs, function(index, element) {
-			$form.append("<input type='hidden' name='" + element.Key + "' value='" + element.Value + "' />");
-		});
-		return $form.serialize();
+		var encodedPairs = [];
+		for(var i = 0; i < keyValuePairs.length; i++) {
+			var kvp = keyValuePairs[i];
+			encodedPairs.push(encodeURIComponent(kvp.Key) + "=" + encodeURIComponent(kvp.Value));
+		}
+		
+		return encodedPairs.join("&");
 	}
 	
 	function toKvp(target, key, kvps) {	
