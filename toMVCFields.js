@@ -13,10 +13,14 @@ function toMvcFields(target) {
 		return encodedPairs.join("&");
 	}
 	
+	function getType(obj) {
+		return (toString.call(obj) === "[object Array]") ? "array" : typeof obj;
+	}
+	
 	function toKvp(target, key, kvps) {	
 		key = (key || "");
 		
-		var targetType = ($.isArray(target)) ? "array" : typeof target;
+		var targetType = getType(target);
 		
 		switch(targetType) {
 			case "string":
