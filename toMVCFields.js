@@ -14,14 +14,17 @@ function toMvcFields(target) {
 	}
 	
 	function getType(obj) {
-		return (toString.call(obj) === "[object Array]") ? "array" : typeof obj;
+		return obj instanceof Array ? "array" : typeof obj;
 	}
 	
 	function toKvp(target, key, kvps) {	
 		key = (key || "");
-		
-		var targetType = getType(target);
-		
+		try
+		{
+			var targetType = getType(target);
+		} catch (e) {
+			console.log(e);
+		}
 		switch(targetType) {
 			case "string":
 			case "number":
